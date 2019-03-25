@@ -1,0 +1,146 @@
+<html>
+
+
+<head>
+
+<script type="text/javascript" src="js/web3.min.js"></script>
+
+<script type="text/javascript" >
+
+  var web3;
+
+
+ window.addEventListener('load', function () {
+
+     
+
+     web3 = new Web3("http://localhost:7545");
+
+  })
+
+
+
+ function getBalance(){
+
+  
+
+   var addr =  document.getElementById("address").value;
+
+   console.log('Ha pulsado');
+
+   web3.eth.getBalance(addr,function(error,result){
+
+
+     if(error){
+
+       console.log(error)
+
+     }
+
+     else{
+
+       console.log(result);
+
+       document.getElementById('result').innerHTML = web3.utils.fromWei(result) + ' Ether';
+
+     }
+
+     });
+
+
+ }
+
+ function enviarTransaccion(){
+
+  
+
+var addrFrom =  document.getElementById("addressFrom").value;
+var addrTo =  document.getElementById("addressTo").value;
+var ether =  document.getElementById("ether").value;
+
+console.log('Ha pulsado');
+console.log(addrFrom);
+console.log(addrTo);
+console.log(ether);
+
+
+web3.eth.sendTransaction({
+   to: addrFrom, from: addrTo, value: web3.utils.toWei(ether) }, function(error,result){
+
+
+  if(error){
+
+    console.log(error)
+
+  }
+
+  else{
+
+    console.log(result);
+
+    document.getElementById('result').innerHTML = web3.utils.fromWei(result) + ' Ether';
+
+  }
+
+  });
+
+
+}
+
+
+
+</script>
+
+
+<title>Consultar saldo</title>
+
+
+
+</head>
+
+
+<body>
+
+
+<!-- <b>Consultar saldo</b><br>
+
+
+
+
+ Introduce la dirección:<br>
+
+ <input type="text" name="direccion" id="address"><br>
+
+ <button type='botton' onclick="getBalance();">Consultar</button>
+
+
+<h2 id='result'></h2> -->
+
+ <b>Enviar saldo</b><br>
+
+
+
+
+ Introduce la dirección from:<br>
+
+ <input type="text" name="direccionfrom" id="addressFrom"><br>
+
+ Introduce la dirección to:<br>
+
+ <input type="text" name="direccionto" id="addressTo"><br>
+ Ether
+ <input type="text" name="ether" id="ether"><br>
+
+ <button type='botton' onclick="enviarTransaccion();">Consultar</button>
+
+
+<h2 id='result'></h2>
+ 
+
+
+
+</body>
+
+
+
+</html>
